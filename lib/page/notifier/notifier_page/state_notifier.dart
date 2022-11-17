@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flut_riverpod_tut/page/modifier/modifier_page/auto_dispose_modifier_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -100,7 +99,8 @@ class StateNotifierView extends StatelessWidget {
                   Consumer(
                     builder: (context, ref, child) {
                       return ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.amber),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.amber),
                         onPressed: () {
                           ref
                               .read(stateNotifierProvider.notifier)
@@ -114,7 +114,8 @@ class StateNotifierView extends StatelessWidget {
                     builder: (context, ref, child) {
                       return ElevatedButton(
                         style:
-                            ElevatedButton.styleFrom(primary: Colors.redAccent),
+                            ElevatedButton.styleFrom(
+                            backgroundColor: Colors.redAccent),
                         onPressed: () {
                           ref.read(stateNotifierProvider.notifier).hitBreak();
                         },

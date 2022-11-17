@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final streamProvider = StreamProvider.autoDispose(
+final streamProvider = StreamProvider<String>(
   (ref) => Stream.periodic(const Duration(seconds: 1), (i) => i.toString()),
 );
 

@@ -49,7 +49,7 @@ class ChangeNotifierView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.amber),
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
                       onPressed: () {
                         ref.read(carProvider).increaseSpeed();
                       },
@@ -57,7 +57,8 @@ class ChangeNotifierView extends StatelessWidget {
                     ),
                     ElevatedButton(
                       style:
-                          ElevatedButton.styleFrom(primary: Colors.redAccent),
+                          ElevatedButton.styleFrom(
+                          backgroundColor: Colors.redAccent),
                       onPressed: () {
                         ref.read(carProvider).hitBreak();
                       },

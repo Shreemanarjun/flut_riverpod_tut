@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final futureProvider = FutureProvider.autoDispose((ref) async {
+final futureProvider = FutureProvider((ref) async {
   final value = await fetchWeather();
-  ref.maintainState = true;
+ // ref.maintainState = true;
   return value;
 });
 
