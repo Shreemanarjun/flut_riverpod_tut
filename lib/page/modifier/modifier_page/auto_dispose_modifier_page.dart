@@ -1,16 +1,30 @@
+import 'dart:math';
+
+import 'package:flut_riverpod_tut/pod_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-Future<String> fetchValue() async {
+Future<String> fetchValue(int value) async {
   await Future.delayed(const Duration(seconds: 1));
-  return 'State will be disposed';
+  if (value == 1) {
+    throw "error";
+  } else {
+    return value.toString();
+  }
+  // return 'State will be disposed';
 }
 
-final futureProvider = FutureProvider.autoDispose<String>((ref) {
-  ref.onDispose(() {
-    print('disposed');
-  });
-  return fetchValue();
+final futureProvider = FutureProvider.autoDispose<String>((ref) async {
+  ref.autoRefresh(duration: const Duration(seconds: 5));
+  try {
+    int random = Random().nextBool() ? 1 : 0;
+    print("random value $random");
+    final value = await fetchValue(random);
+
+    return value;
+  } catch (e) {
+    throw e.toString();
+  }
 });
 
 class AutoDisposeModifierPage extends ConsumerWidget {

@@ -14,7 +14,7 @@ void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(ProviderScope(
     observers: [
-      Logger(),
+      MyLogger(),
     ],
     child: const MyApp(),
   ));

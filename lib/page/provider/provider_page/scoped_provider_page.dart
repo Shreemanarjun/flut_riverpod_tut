@@ -23,16 +23,6 @@ class ScopedProviderPage extends StatelessWidget {
           buildScoped(42),
           buildScoped(90),
           buildScoped(),
-          Consumer(
-            builder: (context, ref, child) {
-              return Switch(
-                value: ref.watch(likeStatePod),
-                onChanged: (value) {
-                  ref.read(likeStatePod.notifier).update((state) => !state);
-                },
-              );
-            },
-          )
         ],
       )),
     );

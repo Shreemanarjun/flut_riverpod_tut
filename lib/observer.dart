@@ -1,29 +1,33 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:let_log/let_log.dart';
 
-class Logger extends ProviderObserver {
+class MyLogger extends ProviderObserver {
   @override
   void didUpdateProvider(ProviderBase provider, Object? previousValue,
       Object? newValue, ProviderContainer container) {
     if (newValue is StateController) {
       final newv = newValue.state;
       final perviousv = (previousValue as StateController).state;
-      debugPrint('Provider is: '
+      Logger.log('Provider is: '
           '${provider.name ?? provider.runtimeType} \n'
-          'new value: $newv\n'
-          'previous value: $perviousv');
-    } else if (newValue is AsyncValue) {
-      final newv = newValue.value;
-      final perviousv = (previousValue as AsyncValue).value;
-      debugPrint('Provider is: '
-          '${provider.name ?? provider.runtimeType} \n'
-          'new value: $newv\n'
-          'previous value: $perviousv');
+          'previous value: $perviousv \n'
+          'new value: $newv');
+    } else if (newValue is AsyncValue?) {
+      try {
+        final newv = newValue?.value;
+        final perviousv = (previousValue as AsyncValue).value;
+        Logger.log('Provider is: '
+            '${provider.name ?? provider.runtimeType} \n'
+            'previous value: $perviousv \n'
+            'new value: $newv');
+      } catch (e) {
+        Logger.error(e);
+      }
     } else {
-      debugPrint('Provider is: '
+      Logger.log('Provider is: '
           '${provider.name ?? provider.runtimeType} \n'
-          'new value: ${newValue.toString()}\n'
-          'previous value: ${previousValue.toString()}');
+          'previous value: ${previousValue.toString()}\n'
+          'new value: ${newValue.toString()}');
     }
     super.didUpdateProvider(provider, previousValue, newValue, container);
   }

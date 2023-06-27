@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final statePRovider = StateProvider<int>((ref) => 0);
+final statePRovider = StateProvider<int>((ref) {
+  return 0;
+});
 
 class StateProviderPage extends StatelessWidget {
   const StateProviderPage({Key? key}) : super(key: key);
@@ -17,9 +19,7 @@ class StateProviderPage extends StatelessWidget {
         builder: (context, ref, child) {
           return FloatingActionButton(
             onPressed: () {
-              final provider = ref.read(statePRovider.notifier);
-
-              provider.state++;
+              ref.read(statePRovider.notifier).update((state) => state);
             },
             child: const Icon(Icons.add),
           );
@@ -46,6 +46,3 @@ class StateProviderPage extends StatelessWidget {
     );
   }
 }
-
-
-

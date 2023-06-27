@@ -34,8 +34,7 @@ class Car {
 }
 
 class CarNotifier extends StateNotifier<Car> {
-  final Ref ref;
-  CarNotifier(this.ref) : super(const Car());
+  CarNotifier() : super(const Car());
 
   void setDoors(int doors) async {
     state = state.copyWith(doors: doors);
@@ -46,14 +45,14 @@ class CarNotifier extends StateNotifier<Car> {
   }
 
   void hitBreak() {
-    if (state != state.copyWith(speed: max(0, state.speed - 30))) {
+    if (state.speed != 0) {
       state = state.copyWith(speed: max(0, state.speed - 30));
     }
   }
 }
 
 final stateNotifierProvider =
-    StateNotifierProvider<CarNotifier, Car>((ref) => CarNotifier(ref));
+    StateNotifierProvider<CarNotifier, Car>((ref) => CarNotifier());
 
 class StateNotifierView extends StatelessWidget {
   const StateNotifierView({Key? key}) : super(key: key);
@@ -113,8 +112,7 @@ class StateNotifierView extends StatelessWidget {
                   Consumer(
                     builder: (context, ref, child) {
                       return ElevatedButton(
-                        style:
-                            ElevatedButton.styleFrom(
+                        style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.redAccent),
                         onPressed: () {
                           ref.read(stateNotifierProvider.notifier).hitBreak();
